@@ -1,35 +1,36 @@
 import pygame
 import variables as vb
-import objects as obj
+import game
 import snake
 import time
+import decor
 
 
-# Initialise Setup
-pygame.init()
-dis=pygame.display.set_mode(vb.board_size)
-dis.fill(vb.background)
-pygame.display.set_caption("Snake by Tom")
-pygame.display.update()
-
-# Coordinates & Time Initialisation
+# Initialise Board, Time & Game
+current_board = decor.Board()
 clock = pygame.time.Clock()
-
-# Snake Initialisation
-gameSnake = snake.Snake(vb.start_size)
-print("Snake Squares : ", gameSnake.squares)
+current_game = game.Game()
 
 # Main Loop
-turns=0
-game_over=False
-while not game_over :
-    turns+=1
+while current_game.state != -1 :
+
+    while current_game.state == 0 :
+        current_board.display.fill(vb.blue)
+        decor.message("You Lost! Press C to Play Again or Q to Quit", vb.red, current_board.display)
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    current_game.full_stop(current_board.display)
+                elif event.key == pygame.K_c:
+                    current_game = game.Game()
+
     # Go through squares in snake and colour them in :
-    dis.fill(vb.background)
-    for sq in gameSnake.squares :
-        print("Square number ",gameSnake.squares.index(sq)," is ",sq)
-        print("----------")
-        pygame.draw.rect(dis, vb.white, ([sq[0],sq[1],10,10]))
+    current_board.display.fill(vb.background)
+    for sq in current_game.snake.squares :
+        pygame.draw.rect(current_board.display, vb.white, ([sq[0],sq[1],10,10]))
 
     for event in pygame.event.get():
         print(event)
@@ -49,17 +50,17 @@ while not game_over :
             if event.key == pygame.K_DOWN :
                 dir=2
 
+            current_game.snake.change_direction(dir)
 
-            gameSnake.change_direction(dir)
+    current_game.snake.go_straight() # If no direction change, go straight
 
+    # Check for boundary encounter :
+    head = current_game.snake.get_head_pos()
+    if (head[0]>vb.board_size[0]) or (head[0]<0) or (head[1]>vb.board_size[1]) or (head[1]<0) :
+        current_game.state = 0
 
-    gameSnake.go_straight()
     # Update Display and tick forward
     pygame.display.update()
     clock.tick(10)
-    # time.sleep(2)
-    # if turns == 4 :
-    #     game_over=True
 
-pygame.quit()
-quit()
+current_game.full_stop(current_board.display)
