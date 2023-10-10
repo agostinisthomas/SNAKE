@@ -1,7 +1,7 @@
 board_size = (750,750)
 x0, y0 = 350, 350
 x1_change, y1_change = 0, 0
-start_size = 4
+start_size = 10
 
 # Colors
 

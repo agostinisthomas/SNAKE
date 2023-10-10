@@ -38,20 +38,22 @@ while not game_over :
         if event.type == pygame.KEYDOWN :
 
             if event.key == pygame.K_LEFT :
-                gameSnake.squares[0][2] = -1
+                dir=-1
 
             if event.key == pygame.K_RIGHT :
-                gameSnake.squares[0][2] = 1
+                dir=1
 
             if event.key == pygame.K_UP :
-                gameSnake.squares[0][2] = -2
+                dir=-2
 
             if event.key == pygame.K_DOWN :
-                gameSnake.squares[0][2] = 2
+                dir=2
 
 
+            gameSnake.change_direction(dir)
 
-    gameSnake.move()
+
+    gameSnake.go_straight()
     # Update Display and tick forward
     pygame.display.update()
     clock.tick(10)

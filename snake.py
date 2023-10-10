@@ -7,23 +7,40 @@ class Snake :
         for i in range(size) :
             self.squares.append([vb.x0-i*15,vb.y0,1])
 
-    def move(self) :
-        print("In move function")
-        if self.squares[0][2] == 1 :
+    def go_straight(self) :
+        dir = self.squares[0][2]
+        if dir == 1 :
             print("Going Right")
-            self.squares = [[self.squares[0][0]+10,self.squares[0][1],1]] + self.squares
-        elif self.squares[0][2] == -1 :
+            self.squares = [[self.squares[0][0]+15,self.squares[0][1],1]] + self.squares
+        elif dir == -1 :
             print("Going left")
-            self.squares = [[self.squares[0][0]-10,self.squares[0][1],1]] + self.squares
-        elif self.squares[0][2] == 2 :
+            self.squares = [[self.squares[0][0]-15,self.squares[0][1],-1]] + self.squares
+        elif dir == 2 :
             print("Going down")
-            self.squares = [[self.squares[0][0],self.squares[0][1]+10,1]] + self.squares
-        elif self.squares[0][2] == -2 :
+            self.squares = [[self.squares[0][0],self.squares[0][1]+15,2]] + self.squares
+        elif dir == -2 :
             print("Going up")
-            self.squares = [[self.squares[0][0],self.squares[0][1]-10,1]] + self.squares
+            self.squares = [[self.squares[0][0],self.squares[0][1]-15,-2]] + self.squares
+        self.squares.pop()
+
+
+    def change_direction(self,dir) :
+        print("In move function")
+        if dir == 1 :
+            print("Going Right")
+            self.squares = [[self.squares[0][0]+10,self.squares[0][1],dir]] + self.squares
+        elif dir == -1 :
+            print("Going left")
+            self.squares = [[self.squares[0][0]-10,self.squares[0][1],dir]] + self.squares
+        elif dir == 2 :
+            print("Going down")
+            self.squares = [[self.squares[0][0],self.squares[0][1]+10,dir]] + self.squares
+        elif dir == -2 :
+            print("Going up")
+            self.squares = [[self.squares[0][0],self.squares[0][1]-10,dir]] + self.squares
 
         removed_square = self.squares.pop()
-        print("Move function removed : ",removed_square)    
+        print("Move function removed : ",removed_square)
             # if index>0 :
             #     sq[2] = self.squares[index]
         # On décale les carrés : le carré n prend la place du carré n-1 en partant de la tête
