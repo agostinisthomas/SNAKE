@@ -19,4 +19,6 @@ class Board :
 
 class Food :
     def __init__(self, count) :
-        self.count=encounter
+        self.count=count
+
+    
