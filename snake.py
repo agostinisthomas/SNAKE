@@ -25,7 +25,6 @@ class Snake :
 
 
     def change_direction(self,dir) :
-        print("In move function")
         if dir == 1 :
             print("Going Right")
             self.squares = [[self.squares[0][0]+10,self.squares[0][1],dir]] + self.squares
@@ -40,13 +39,6 @@ class Snake :
             self.squares = [[self.squares[0][0],self.squares[0][1]-10,dir]] + self.squares
 
         removed_square = self.squares.pop()
-        print("Move function removed : ",removed_square)
-            # if index>0 :
-            #     sq[2] = self.squares[index]
-        # On décale les carrés : le carré n prend la place du carré n-1 en partant de la tête
-        # for sq_nb in range(len(self.squares)-1,0,-1) :
-        #     print("Square Number : ",sq_nb)
-        #     self.squares[sq_nb]=self.squares[sq_nb-1]
 
 
     def get_head_pos(self) :
@@ -54,3 +46,13 @@ class Snake :
 
     def get_direction(self,square) :
         return self.squares[square][2]
+
+    def grow(self) :
+        if self.get_direction(-1) == 1 :
+            self.squares.append([self.squares[-1][0]-10,self.squares[-1][1],self.squares[-1][2]])
+        elif self.get_direction(-1) == -1 :
+            self.squares.append([self.squares[-1][0]+10,self.squares[-1][1],self.squares[-1][2]])
+        elif self.get_direction(-1) == 2 :
+            self.squares.append([self.squares[-1][0],self.squares[-1][1]-10,self.squares[-1][2]])
+        elif self.get_direction(-1) == -2 :
+            self.squares.append([self.squares[-1][0],self.squares[-1][1]+10,self.squares[-1][2]])

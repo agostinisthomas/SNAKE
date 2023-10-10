@@ -1,5 +1,7 @@
 import variables as vb
 import pygame
+import snake
+import random
 
 pygame.font.init()
 font_style = pygame.font.SysFont("bahnschrift", 50)
@@ -18,7 +20,12 @@ class Board :
 
 
 class Food :
-    def __init__(self, count) :
-        self.count=count
+    def __init__(self) :
+        foodx = int(random.randrange(0, vb.board_size[0] - vb.snake_block) / 10.0) * 10.0
+        foody = int(random.randrange(0, vb.board_size[1] - vb.snake_block) / 10.0) * 10.0
+        self.xcoord = foodx
+        self.ycoord = foody
+        self.coordinates = [foodx, foody]
 
-    
+    def get_position(self) :
+        return [self.xcoord, self.ycoord]
