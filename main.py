@@ -56,13 +56,9 @@ while current_game.state != -1 :
     current_game.snake.go_straight() # If no direction change, go straight
 
     # Check if snake encounters boundary, itself or finds food  :
-    head = current_game.snake.get_head_pos()
-    if (head[0]>vb.board_size[0]) or (head[0]<0) or (head[1]>vb.board_size[1]) or (head[1]<0) :
-        current_game.state = 0
 
-    for fd in current_game.foodList :
-        if (abs(head[0] - fd.xcoord) < 20) and ((abs(head[1] - fd.ycoord) < 20)) :
-            fd.eat(current_game)
+    current_game.checkEncounters()
+
 
     # Update Display and tick forward
     # pygame.display.update()

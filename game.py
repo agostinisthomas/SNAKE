@@ -46,6 +46,18 @@ class Game :
 
         pygame.display.update()
 
+    def checkEncounters(self) :
+        head = self.snake.get_head_pos()
+        if (head[0]>vb.board_size[0]) or (head[0]<0) or (head[1]>vb.board_size[1]) or (head[1]<0) :
+            self.state = 0
+
+        for fd in self.foodList :
+            if (abs(head[0] - fd.xcoord) < 20) and ((abs(head[1] - fd.ycoord) < 20)) :
+                fd.eat(self)
+
+        for sq in self.snake.squares[1:] :
+            if head == [sq[0],sq[1]] :
+                self.state = 0
 
 
     def seed_food(self) :

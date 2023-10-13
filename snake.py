@@ -40,7 +40,6 @@ class Snake :
 
         removed_square = self.squares.pop()
 
-
     def get_head_pos(self) :
         return [self.squares[0][0],self.squares[0][1]]
 
@@ -56,3 +55,5 @@ class Snake :
             self.squares.append([self.squares[-1][0],self.squares[-1][1]-10,self.squares[-1][2]])
         elif self.get_direction(-1) == -2 :
             self.squares.append([self.squares[-1][0],self.squares[-1][1]+10,self.squares[-1][2]])
+
+    
