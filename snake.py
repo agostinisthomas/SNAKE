@@ -5,22 +5,22 @@ class Snake :
         self.size = size
         self.squares = []
         for i in range(size) :
-            self.squares.append([vb.x0-i*15,vb.y0,1])
+            self.squares.append([vb.x0-i*10,vb.y0,1])
 
     def go_straight(self) :
         dir = self.squares[0][2]
         if dir == 1 :
             print("Going Right")
-            self.squares = [[self.squares[0][0]+15,self.squares[0][1],1]] + self.squares
+            self.squares = [[self.squares[0][0]+10,self.squares[0][1],1]] + self.squares
         elif dir == -1 :
             print("Going left")
-            self.squares = [[self.squares[0][0]-15,self.squares[0][1],-1]] + self.squares
+            self.squares = [[self.squares[0][0]-10,self.squares[0][1],-1]] + self.squares
         elif dir == 2 :
             print("Going down")
-            self.squares = [[self.squares[0][0],self.squares[0][1]+15,2]] + self.squares
+            self.squares = [[self.squares[0][0],self.squares[0][1]+10,2]] + self.squares
         elif dir == -2 :
             print("Going up")
-            self.squares = [[self.squares[0][0],self.squares[0][1]-15,-2]] + self.squares
+            self.squares = [[self.squares[0][0],self.squares[0][1]-10,-2]] + self.squares
         self.squares.pop()
 
 
