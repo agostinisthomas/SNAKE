@@ -1,10 +1,8 @@
 import pygame
 import variables as vb
 import game
-import snake
-import time
 import decor
-import math
+
 
 
 # Initialise Board, Time & Game
